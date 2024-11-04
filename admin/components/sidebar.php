@@ -26,8 +26,8 @@
 					<span class="menu-arrow arrow_carrot-right"></span>
 				</a>
 				<ul class="sub">
-					<li><a class="" href="indexadmin.php?id=1">Thêm Sản Phẩm</a></li>
-					<li><a class="" href="indexadmin.php?id=1">Danh Sản Phẩm</a></li>
+					<li><a class="" href="indexadmin.php?id=5">Thêm Sản Phẩm</a></li>
+					<li><a class="" href="indexadmin.php?id=4">Danh Sản Phẩm</a></li>
 
 				</ul>
 			</li>

@@ -21,11 +21,11 @@ CREATE TABLE products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
     description TEXT,
-    price DECIMAL(10, 2) NOT NULL,
+    price FLOAT NOT NULL,
+    sale_price FLOAT NOT NULL,
     category_id INT,
     image_url VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    stock_quantity INT DEFAULT 0,
+    quantity INT DEFAULT 0,
     FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE
     SET NULL
 );
