@@ -1,6 +1,7 @@
 -- Tạo bảng users (người dùng)
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(50) NOT NULL,
     username VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20),

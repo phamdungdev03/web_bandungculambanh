@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="./public/css/login.css">
+    <link rel="stylesheet" href="./css/login.css">
 </head>
+
 <body>
     <div class="container">
         <div class="form-container">
-            <form id="loginForm">
+            <form id="loginForm" action="handle_login.php" method="POST">
                 <h1>Đăng nhập</h1>
-                <input type="text" id="email" class="input-field" placeholder="Email" required>
-                <input type="password" id="password" class="input-field" placeholder="Password" required>
-                <input type="submit" class="submit-button" value="Đăng nhập"/>
+                <input type="text" id="username" name="username" class="input-field" placeholder="Tên đăng nhập" required>
+                <input type="password" id="password" name="password" class="input-field" placeholder="Mật khẩu" required>
+                <input type="submit" class="submit-button" name="btn_submit" value="Đăng nhập" />
                 <a href="sign_up.php" class="sign-up-link">Bạn chưa có tài khoản? Đăng ký</a>
             </form>
         </div>
@@ -24,25 +26,23 @@
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const email = document.getElementById('email').value.trim();
+            const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
-            
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                alert("Vui lòng nhập email hợp lệ.");
+
+            if (username === "") {
+                alert("Vui lòng nhập tên đăng nhập.");
+                event.preventDefault();
                 return;
             }
-            
+
             if (password === "") {
                 alert("Vui lòng nhập mật khẩu.");
+                event.preventDefault();
                 return;
             }
 
-            alert("Đăng nhập thành công!");
-            this.submit();
         });
     </script>
 </body>
+
 </html>
