@@ -1,0 +1,40 @@
+<?php
+include('../includes/category_function.php');
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $action = $_POST['action'];
+    switch ($action) {
+        case 'addCategory':
+            $categoryName = $_POST['category_name'];
+            if (addCategory($categoryName)) {
+                echo "Thêm danh mục thành công!";
+                header("location: ../indexadmin.php?id=1");
+            } else {
+                echo "Lỗi khi thêm";
+            }
+
+            break;
+        case 'editCategory':
+            $categoryId = $_POST['category_id'];
+            $categoryName = $_POST['category_name'];
+            if (editCategory($categoryId, $categoryName)) {
+                echo "Cập nhật danh mục thành công!";
+                header("location: ../indexadmin.php?id=1");
+            } else {
+                echo "Lỗi khi cập nhật";
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if (isset($_GET['category_id'])) {
+        $categoryId = $_GET['category_id'];
+        if (deleteCategory($categoryId)) {
+            header("Location: ../indexadmin.php?id=1");
+        } else {
+            header("Location: ../indexadmin.php?id=1");
+        }
+    }
+}
