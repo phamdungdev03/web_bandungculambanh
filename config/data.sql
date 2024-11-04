@@ -6,6 +6,7 @@ CREATE TABLE users (
     phone_number VARCHAR(20),
     address TEXT,
     password VARCHAR(255) NOT NULL,
+    role_name VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 -- Tạo bảng categories (danh mục sản phẩm)
@@ -50,9 +51,11 @@ CREATE TABLE order_items (
 -- Tạo bảng contact (liên hệ)
 CREATE TABLE contact (
     contact_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_name VARCHAR(100) NOT NULL,
+    user_id INT,
     email VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20),
     message TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE
+    SET NULL
 );

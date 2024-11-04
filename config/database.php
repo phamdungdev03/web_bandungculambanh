@@ -2,8 +2,8 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "your_database_name";
-
+    $dbname = "qldclb";
+    $host = 3366;
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
