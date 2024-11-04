@@ -67,7 +67,6 @@
             const confirmPassword = document.getElementById('confirm_password');
 
             form.addEventListener('submit', function(event) {
-                // Kiểm tra hợp lệ
                 if (!fullname.value.trim() || !username.value.trim() || !email.value.trim() ||
                     !address.value.trim() || !phone.value.trim() || !password.value.trim() ||
                     !confirmPassword.value.trim()) {

@@ -10,8 +10,11 @@
 
 <body>
     <?php
+    session_start();
     include("./page/component/header.php");
     include("./page/component/banner.php");
+    include("./page/component/hot_product.php");
+    include("./page/component/footer.php");
     ?>
 </body>
 

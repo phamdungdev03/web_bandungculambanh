@@ -5,7 +5,7 @@
         box-sizing: border-box;
     }
 
-    .conatainer_header-top {
+    .container_header-top {
         background-color: #4F2227;
     }
 
@@ -22,7 +22,6 @@
         font-size: 18px;
         color: #fff;
         text-transform: uppercase;
-
     }
 
     .top-menu {
@@ -100,13 +99,28 @@
         display: flex;
         align-items: center;
         gap: 20px;
+        /* Khoảng cách giữa các phần tử */
+    }
+
+    .user-actions a {
+        display: flex;
+        align-items: center;
+        color: #333;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+        gap: 6px;
+    }
+
+    .user-actions a:hover {
+        color: #B17010;
     }
 
     .cart {
         position: relative;
         color: #333;
         font-size: 20px;
-        text-decoration: none;
+        /* Kích thước biểu tượng giỏ hàng */
     }
 
     .cart-count {
@@ -118,15 +132,18 @@
         font-size: 12px;
         padding: 2px 5px;
         border-radius: 50%;
+        font-weight: bold;
     }
 
     .login-btn {
         font-size: 16px;
-        color: #333;
-        text-decoration: none;
-        padding: 5px 10px;
-        border: 1px solid #333;
+        color: #fff;
+        padding: 8px 12px;
+        /* Padding cho nút */
+        border: 1px solid #fff;
+        /* Đường viền trắng */
         border-radius: 5px;
+        background-color: transparent;
         transition: background-color 0.3s, color 0.3s;
     }
 
@@ -135,7 +152,11 @@
         color: #fff;
     }
 
-    /* css header bottom */
+    .name_user {
+        text-transform: uppercase;
+    }
+
+    /* CSS cho phần header bottom */
     .container_header-bottom {
         background-color: #4F2227;
     }
@@ -156,10 +177,14 @@
 
     .header-bottom li {
         font-size: 20px;
-        color: #fff;
         cursor: pointer;
         transition: color 0.3s;
         text-transform: uppercase;
+    }
+
+    .header-bottom li a {
+        text-decoration: none;
+        color: #fff;
     }
 
     .header-bottom li:hover {
@@ -168,7 +193,7 @@
 </style>
 
 <header class="header">
-    <div class="conatainer_header-top">
+    <div class="container_header-top">
         <div class="header-top">
             <h2>Chào mừng quý khách</h2>
             <ul class="top-menu">
@@ -187,32 +212,51 @@
 
     <!-- Content Section -->
     <div class="header-content">
-        <!-- Logo -->
         <div class="logo">
             <img src="../../public/images/logo_shop.png" alt="Logo">
         </div>
 
-        <!-- Search Bar -->
         <div class="search-bar">
             <input type="text" placeholder="Tìm kiếm sản phẩm...">
             <button type="submit"><i class="fas fa-search"></i></button>
         </div>
 
-        <!-- Cart and Login -->
         <div class="user-actions">
-            <a href="#" class="cart">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">0</span>
-            </a>
-            <a href="./page/login.php" class="login-btn">Đăng Nhập</a>
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo "
+                            <a href='donhang.php' class='header__nav-item'>
+                                <i class='fa-solid fa-table-list'></i>
+                                <p>Đơn hàng</p>
+                            </a>
+                            <a href='giohang.php' class='header__nav-item'>
+                                <i class='fa-solid fa-cart-shopping'></i>
+                                <p>Giỏ hàng</p>
+                            </a>
+                        
+                            <a  href='page/component/logout.php' class='header__nav-item'>
+                                <i class='fa-solid fa-right-from-bracket'></i>
+                                <p class='name_user'>" . $_SESSION['username'] . "</p>
+                            </a>
+                        ";
+            } else {
+                echo " 
+                            <a href='#' class='cart'>
+                                <i class='fa-solid fa-cart-shopping'></i>
+                                <span class='cart-count'>0</span>
+                            </a>
+                            <a href='./page/login.php' class='login-btn'>Đăng Nhập</a>
+                        ";
+            }
+            ?>
         </div>
     </div>
     <div class="container_header-bottom">
         <div class="header-bottom">
             <ul>
-                <li>trang chủ</li>
-                <li>sản phẩm</li>
-                <li>liên hệ</li>
+                <li><a href="../index.php">trang chủ</a></li>
+                <li><a href="">sản phẩm</a></li>
+                <li><a href="page/contact.php">liên hệ</a></li>
             </ul>
         </div>
     </div>
