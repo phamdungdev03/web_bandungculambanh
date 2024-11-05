@@ -7,8 +7,7 @@ CREATE TABLE users (
     phone_number VARCHAR(20),
     address TEXT,
     password VARCHAR(255) NOT NULL,
-    role_name VARCHAR(50),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    role_name VARCHAR(50)
 );
 -- Tạo bảng categories (danh mục sản phẩm)
 CREATE TABLE categories (
@@ -52,7 +51,7 @@ CREATE TABLE orders (
     user_id INT,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total_amount DECIMAL(10, 2) NOT NULL,
-    status VARCHAR(20) DEFAULT 'Pending',
+    status VARCHAR(20) DEFAULT 'pending',
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE
     SET NULL
 );

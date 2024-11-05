@@ -65,7 +65,7 @@ $result = getAllProducts();
 <script>
     function confirmDelete(event, url) {
         event.preventDefault();
-        if (confirm("Bạn có chắc chắn muốn xóa thể loại này không?")) {
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
             window.location.href = url;
         }
     }

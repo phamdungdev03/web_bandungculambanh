@@ -34,7 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         if (deleteCategory($categoryId)) {
             header("Location: ../indexadmin.php?id=1");
         } else {
-            header("Location: ../indexadmin.php?id=1");
+            echo "<script>
+                        alert('Lỗi khi xóa thể loại!');
+                        window.location.href = '../indexadmin.php?id=1';
+                      </script>";
+            exit();
         }
     }
 }

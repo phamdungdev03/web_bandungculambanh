@@ -21,11 +21,11 @@ include('./components/head.php');
         "4" => "./products/listProduct.php",
         "5" => "./products/addProduct.php",
         "6" => "./products/editProduct.php",
-        "7" => "themloai.php",
-        "8" => "dsloaisua.php",
-        "9" => "themhoadon.php",
-        "10" => "dshoadon.php",
-        "11" => "dscthoadon.php"
+        "7" => "./users/listUser.php",
+        "8" => "./users/addUser.php",
+        "9" => "./users/editUser.php",
+        "10" => "./orders/listOrder.php",
+        "11" => "./orders/editOrder.php"
     ];
     $id = $_GET["id"] ?? null;
     $trang = $pages[$id] ?? 'dashboard.php';
