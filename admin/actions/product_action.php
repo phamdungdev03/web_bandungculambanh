@@ -13,7 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $image = $_FILES['image'];
             $targetDir = '../../public/uploads/';
-            $imageName = basename($image['name']);
+            $timestamp = time();
+            $imageName = $timestamp . '_' . basename($image['name']);
             $targetFilePath = $targetDir . $imageName;
 
             if (!file_exists($targetDir)) {
@@ -34,14 +35,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             break;
         case 'editProduct':
+            $productId = $_POST['product_id'];
+            $productName = $_POST['product_name'];
+            $description = $_POST['description'];
+            $price = $_POST['price'];
+            $salePrice = $_POST['sale_price'];
+            $quantity = $_POST['quantity'];
             $categoryId = $_POST['category_id'];
-            $categoryName = $_POST['category_name'];
-            if (editCategory($categoryId, $categoryName)) {
-                echo "Cập nhật danh mục thành công!";
-                header("location: ../indexadmin.php?id=4");
+
+            $image = $_FILES['image'];
+            $existingImage = $_POST['existing_image'];
+
+            $targetDir = '../../public/uploads/';
+            $newImageName = "";
+            if ($image && !empty($image['name'])) {
+                $timestamp = time();
+                $imageName = $timestamp . '_' . basename($image['name']);
+                $targetFilePath = $targetDir . $imageName;
+
+                if (!file_exists($targetDir)) {
+                    mkdir($targetDir, 0755, true);
+                }
+
+                if (!empty($existingImage) && file_exists($targetDir . $existingImage)) {
+                    unlink($targetDir . $existingImage);
+                }
+
+                if (move_uploaded_file($image['tmp_name'], $targetFilePath)) {
+                    $newImageName = $imageName;
+                }
             } else {
-                echo "Lỗi khi cập nhật";
+                $newImageName = $existingImage;
             }
+
+            if (editProduct($productId, $productName, $description, $price, $quantity, $salePrice, $newImageName, $categoryId)) {
+                echo "Cập nhật sản phẩm thành công!";
+                header("Location: ../indexadmin.php?id=4");
+                exit();
+            } else {
+                echo "Lỗi khi cập nhật sản phẩm";
+            }
+
             break;
         default:
             break;
@@ -50,11 +84,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET['product_id'])) {
-        $categoryId = $_GET['product_id'];
-        if (deleteProduct($categoryId)) {
-            header("Location: ../indexadmin.php?id=4");
-        } else {
-            header("Location: ../indexadmin.php?id=4");
+        $productId = $_GET['product_id'];
+        $product = getProductById($productId);
+        if ($product) {
+            $imageName = $product['image_url'];
+            if (deleteProduct($productId)) {
+                $targetFilePath = '../../public/uploads/' . $imageName;
+                if (file_exists($targetFilePath)) {
+                    unlink($targetFilePath);
+                }
+                header("Location: ../indexadmin.php?id=4");
+                exit();
+            } else {
+                echo "<script>
+                        alert('Lỗi khi xóa sản phẩm!');
+                        window.location.href = '../indexadmin.php?id=4';
+                      </script>";
+                exit();
+            }
         }
     }
 }

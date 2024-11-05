@@ -28,8 +28,8 @@ if (isset($_GET['product_id'])) {
                 Cập Nhật Sản Phẩm
             </header>
             <div class="panel-body">
-                <form action="./actions/category_action.php" method="post">
-                    <input type="hidden" name="action" value="editPProduct">
+                <form action="./actions/product_action.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="editProduct">
                     <div class="form-group">
                         <label for="product_id">Mã Sản Phẩm</label>
                         <input type="text" class="form-control" id="product_id" name="product_id" value="<?php echo $product['product_id'] ?>" readonly>
@@ -67,10 +67,11 @@ if (isset($_GET['product_id'])) {
                     </div>
                     <div id="imagePreviewContainer" style="margin-top: 20px;">
                         <img id="imagePreview" src="../public/uploads/<?php echo $product['image_url'] ?>" alt="Image Preview" style="width: 50px; height: 50px; border-radius: 20px; margin-bottom: 10px;">
+                        <input type="hidden" name="existing_image" value="<?php echo $product['image_url']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="image">Ảnh</label>
-                        <input type="file" class="form-control" id="image" name="image" onchange="previewImage(event)" required>
+                        <input type="file" class="form-control" id="image" name="image" onchange="previewImage(event)">
                     </div>
                     <div class="form-group">
                         <label for="description">Mô Tả</label>
