@@ -46,7 +46,7 @@ $result = getAllProducts();
                                     <td><img src=\"{$imageUrl}\" alt=\"Product Image\" style=\"width: 70px; height: 70px; border-radius: 20px;\" /></td>
                                     <td>
                                         <div class='btn-group'>
-                                            <a class='btn btn-primary' href='indexadmin.php?id=6&product_id={$row['product_id']}'><i class='icon_plus_alt2'></i></a>
+                                            <a class='btn btn-primary' href='indexadmin.php?id=6&product_id={$row['product_id']}'><i class='icon_pens_alt'></i></a>
                                             <a class='btn btn-danger' href='./actions/product_action.php?product_id={$row['product_id']}' onclick=\"confirmDelete(event, this.href);\"><i class='icon_close_alt2'></i></a>
                                         </div>
                                     </td>

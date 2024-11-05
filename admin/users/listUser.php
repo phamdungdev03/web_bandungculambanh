@@ -47,7 +47,7 @@ $result = getAllUsers($userIdCurrent);
                                     <td>{$row['address']}</td>
                                     <td>
                                         <div class='btn-group'>
-                                            <a class='btn btn-primary' href='indexadmin.php?id=9&user_id={$row['user_id']}'><i class='icon_plus_alt2'></i></a>
+                                            <a class='btn btn-primary' href='indexadmin.php?id=9&user_id={$row['user_id']}'><i class='icon_pens_alt'></i></a>
                                             <a class='btn btn-danger' href='./actions/user_action.php?user_id={$row['user_id']}' onclick=\"confirmDelete(event, this.href);\"><i class='icon_close_alt2'></i></a>
                                         </div>
                                     </td>

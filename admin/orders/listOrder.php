@@ -62,7 +62,7 @@ $result = getAllOrders();
                                     <td>{$statusDisplay}</td>
                                     <td>
                                         <div class='btn-group'>
-                                            <a class='btn btn-primary' href='indexadmin.php?id=11&order_id={$row['order_id']}'><i class='icon_plus_alt2'></i></a>
+                                            <a class='btn btn-primary' href='indexadmin.php?id=11&order_id={$row['order_id']}'><i class='icon_pens_alt'></i></a>
                                         </div>
                                     </td>
                                   </tr>";

@@ -37,7 +37,7 @@ $result = getAllCategories();
                                     <td>{$row['category_name']}</td>
                                     <td>
                                         <div class='btn-group'>
-                                            <a class='btn btn-primary' href='indexadmin.php?id=3&category_id={$row['category_id']}'><i class='icon_plus_alt2'></i></a>
+                                            <a class='btn btn-primary' href='indexadmin.php?id=3&category_id={$row['category_id']}'><i class='icon_pens_alt'></i></a>
                                             <a class='btn btn-danger' href='./actions/category_action.php?category_id={$row['category_id']}' onclick=\"confirmDelete(event, this.href);\"><i class='icon_close_alt2'></i></a>
                                         </div>
                                     </td>

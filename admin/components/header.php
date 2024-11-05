@@ -4,19 +4,8 @@
 	</div>
 
 	<!--logo start-->
-	<a href="indexadmin.php" class="logo">Quản Lí <span class="lite">Dụng Cụ Làm Bánh</span></a>
+	<a href="indexadmin.php" class="logo" style="font-weight: 500; font-size: 20px; line-height: 1.6;">Quản Lí <span class="lite">Dụng Cụ Làm Bánh</span></a>
 	<!--logo end-->
-
-	<div class="nav search-row" id="top_menu">
-		<ul class="nav top-menu">
-			<li>
-				<form class="navbar-form">
-					<input class="form-control" placeholder="Search" type="text">
-				</form>
-			</li>
-		</ul>
-	</div>
-
 	<div class="top-nav notification-row">
 		<ul class="nav pull-right top-menu">
 			<li class="dropdown">
