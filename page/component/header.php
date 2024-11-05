@@ -226,11 +226,11 @@
             <?php
             if (isset($_SESSION['username'])) {
                 echo "
-                            <a href='donhang.php' class='header__nav-item'>
+                            <a href='http://localhost/web_dungculambanh/page/order.php' class='header__nav-item'>
                                 <i class='fa-solid fa-table-list'></i>
                                 <p>Đơn hàng</p>
                             </a>
-                            <a href='giohang.php' class='header__nav-item'>
+                            <a href='http://localhost/web_dungculambanh/page/cart.php' class='header__nav-item'>
                                 <i class='fa-solid fa-cart-shopping'></i>
                                 <p>Giỏ hàng</p>
                             </a>
@@ -256,7 +256,7 @@
         <div class="header-bottom">
             <ul>
                 <li><a href="../index.php">trang chủ</a></li>
-                <li><a href="">sản phẩm</a></li>
+                <li><a href="http://localhost/web_dungculambanh/page/products.php">sản phẩm</a></li>
                 <li><a href="http://localhost/web_dungculambanh/page/contact.php">liên hệ</a></li>
             </ul>
         </div>
