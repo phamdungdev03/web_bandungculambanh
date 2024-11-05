@@ -66,7 +66,7 @@
     }
 
     .logo img {
-        width: 100px;
+        width: 166px;
         height: auto;
     }
 
@@ -74,7 +74,7 @@
         flex-grow: 1;
         display: flex;
         align-items: center;
-        max-width: 400px;
+        max-width: 50%;
         margin: 0 20px;
     }
 
@@ -87,7 +87,7 @@
     }
 
     .search-bar button {
-        padding: 8px 12px;
+        padding: 8px 30px;
         border: none;
         background-color: #333;
         color: #fff;
@@ -145,6 +145,7 @@
         border-radius: 5px;
         background-color: transparent;
         transition: background-color 0.3s, color 0.3s;
+        border: 1px solid #333;
     }
 
     .login-btn:hover {
@@ -213,7 +214,7 @@
     <!-- Content Section -->
     <div class="header-content">
         <div class="logo">
-            <img src="../../public/images/logo_shop.png" alt="Logo">
+            <img src="http://localhost/web_dungculambanh/public/images/logo_shop.png" alt="Logo">
         </div>
 
         <div class="search-bar">
@@ -234,7 +235,7 @@
                                 <p>Giỏ hàng</p>
                             </a>
                         
-                            <a  href='page/component/logout.php' class='header__nav-item'>
+                            <a  href='http://localhost/web_dungculambanh/page/component/logout.php' class='header__nav-item'>
                                 <i class='fa-solid fa-right-from-bracket'></i>
                                 <p class='name_user'>" . $_SESSION['username'] . "</p>
                             </a>
@@ -245,7 +246,7 @@
                                 <i class='fa-solid fa-cart-shopping'></i>
                                 <span class='cart-count'>0</span>
                             </a>
-                            <a href='./page/login.php' class='login-btn'>Đăng Nhập</a>
+                            <a href='http://localhost/web_dungculambanh/page/login.php' class='login-btn'>Đăng Nhập</a>
                         ";
             }
             ?>
@@ -256,7 +257,7 @@
             <ul>
                 <li><a href="../index.php">trang chủ</a></li>
                 <li><a href="">sản phẩm</a></li>
-                <li><a href="page/contact.php">liên hệ</a></li>
+                <li><a href="http://localhost/web_dungculambanh/page/contact.php">liên hệ</a></li>
             </ul>
         </div>
     </div>
