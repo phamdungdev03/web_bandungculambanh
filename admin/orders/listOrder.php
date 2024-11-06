@@ -37,10 +37,10 @@ $result = getAllOrders();
                         while ($row = $result->fetch_assoc()) {
                             switch ($row['status']) {
                                 case 'pending':
-                                    $statusDisplay = 'Đang Xử Lý';
+                                    $statusDisplay = 'Chờ Xác Nhận';
                                     break;
                                 case 'processed':
-                                    $statusDisplay = 'Đã Xử Lý';
+                                    $statusDisplay = 'Đã Xác Nhận';
                                     break;
                                 case 'shipping':
                                     $statusDisplay = 'Đang Vận Chuyển';

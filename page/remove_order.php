@@ -2,7 +2,7 @@
 include '../config/database.php';
 $conn = getConnection();
 
-$sql = "UPDATE `orders` SET `status`='Đã hủy' WHERE `order_id`=' " . $_GET['iddh'] . "'";
+$sql = "UPDATE `orders` SET `status`='cancelled' WHERE `order_id`=' " . $_GET['iddh'] . "'";
 if (mysqli_query($conn, $sql)) {
     header('location:order.php');
 } else {

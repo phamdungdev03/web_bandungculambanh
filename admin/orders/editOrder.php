@@ -47,8 +47,8 @@ if (isset($_GET['order_id'])) {
                     <div class="form-group">
                         <label for="status">Trạng Thái Giao Hàng</label>
                         <select class="form-control" id="status" name="status" required>
-                            <option value="pending" <?php echo ($order['status'] == 'pending') ? 'selected' : ''; ?>>Đang Xử Lý</option>
-                            <option value="processed" <?php echo ($order['status'] == 'processed') ? 'selected' : ''; ?>>Đã Xử Lý</option>
+                            <option value="pending" <?php echo ($order['status'] == 'pending') ? 'selected' : ''; ?>>Chờ Xác Nhận</option>
+                            <option value="processed" <?php echo ($order['status'] == 'processed') ? 'selected' : ''; ?>>Đã Xác Nhận</option>
                             <option value="shipping" <?php echo ($order['status'] == 'shipping') ? 'selected' : ''; ?>>Đang Vận Chuyển</option>
                             <option value="completed" <?php echo ($order['status'] == 'completed') ? 'selected' : ''; ?>>Hoàn Thành</option>
                             <option value="cancelled" <?php echo ($order['status'] == 'cancelled') ? 'selected' : ''; ?>>Đã Hủy</option>

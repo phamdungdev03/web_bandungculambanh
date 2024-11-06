@@ -40,7 +40,7 @@
                 $index = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $product_id = $row['product_id'];
-                    $resultProduct =  mysqli_query($conn, "SELECT * from san_pham where product_id = $product_id");
+                    $resultProduct =  mysqli_query($conn, "SELECT * from products where product_id = $product_id");
                     $rowItem = mysqli_fetch_assoc($resultProduct);
                     $index++;
                     $ma = $row['order_id'];

@@ -116,16 +116,35 @@
                         <td>Dự kiến 10 ngày sau khi đơn hàng đã được xử lý</td>
                         <td>
                             <?php
-                            echo $mattcu
+                            switch ($mattcu) {
+                                case 'pending':
+                                    $statusDisplay = 'Chờ Xác Nhận';
+                                    break;
+                                case 'processed':
+                                    $statusDisplay = 'Đã Xác Nhận';
+                                    break;
+                                case 'shipping':
+                                    $statusDisplay = 'Đang Vận Chuyển';
+                                    break;
+                                case 'completed':
+                                    $statusDisplay = 'Hoàn Thành';
+                                    break;
+                                case 'cancelled':
+                                    $statusDisplay = 'Đã Hủy';
+                                    break;
+                                default:
+                                    $statusDisplay = 'Không xác định';
+                            }
+                            echo $statusDisplay;
                             ?>
                         </td>
                         <td>
-                            <a href="order_detail.php?idh=<?php echo $ma ?>">Xem chi tiết</a>
+                            <a href="order_detail.php?iddh=<?php echo $ma ?>">Xem chi tiết</a>
                         </td>
                         <td>
-                            <?php if ($mattcu == 5) { ?>
+                            <?php if ($mattcu == "cancelled") { ?>
                             <?php echo "Hủy thành công";
-                            } else if ($mattcu == 4) {
+                            } else if ($mattcu == "completed") {
                                 echo "Đã hoàn thành";
                             } else {
                             ?>
