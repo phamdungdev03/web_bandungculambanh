@@ -271,14 +271,14 @@
             echo "<script>
                 localStorage.removeItem('selectedCartIds');
                 alert('$error');
-                window.location.href = '$base_url/page/cart.php';
+                window.location.href = '$base_url/cart.php';
              </script>";
             ?>
         <?php } else if (!empty($success)) { ?>
             <?php
             echo "<script>
                 alert('Đặt đơn hàng thành công. Tiếp tục vào đơn hàng');
-                window.location.href = '$base_url/page/order.php';
+                window.location.href = '$base_url/order.php';
             </script>";
             ?>
         <?php

@@ -123,10 +123,10 @@
                 $format_price = number_format($price, 0, ",", ".");
         ?>
                 <div class="product-item">
-                    <a href="<?php echo $base_url ?>/page/detail_product.php?product_id=<?php echo $product_id; ?>">
+                    <a href="<?php echo $base_url ?>/detail_product.php?product_id=<?php echo $product_id; ?>">
                         <img src="../public/uploads/<?php echo $image_url; ?>" alt="product_img">
                     </a>
-                    <a href="<?php echo $base_url ?>/page/detail_product.php?product_id=<?php echo $product_id; ?>">
+                    <a href="<?php echo $base_url ?>/detail_product.php?product_id=<?php echo $product_id; ?>">
                         <h2 class="product-title"><?php echo htmlspecialchars($product_name); ?></h2>
                     </a>
                     <p class="product-price"><?php echo $format_price; ?>₫</p>

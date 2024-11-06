@@ -116,7 +116,7 @@
     <div class="all_product-items">
         <?php
         include('config/database.php');
-        include('../config/url_config.php');
+        include('config/url_config.php');
         $sql = "SELECT * FROM products";
         $conn = getConnection();
         $result = mysqli_query($conn, $sql);
