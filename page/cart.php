@@ -16,6 +16,7 @@
     ?>
     <?php
     include '../config/database.php';
+    include('../config/url_config.php');
     if (isset($_SESSION['username'])) {
         $error = false;
         $success = false;
@@ -195,8 +196,6 @@
                                 }
                             }
                         }
-
-
                         $userRow = $resultUser->fetch_assoc();
                         $user_id = $_SESSION['user_id'];
                         $customer_name = $_POST['ten'];
@@ -207,7 +206,7 @@
                         date_default_timezone_set('Asia/Ho_Chi_Minh');
                         $currentTime = time();
                         $sql2 = "INSERT INTO `orders`( `user_id`,`order_date`, `total_amount`, `status`)
-                VALUES ('$user_id', '$currentTime', '$total_amount', 'Pending')";
+                VALUES ('$user_id', '$currentTime', '$total_amount', 'pending')";
                         $inserntOrder = mysqli_query($conn, $sql2);
                         $last_id = mysqli_insert_id($conn);
 
@@ -268,17 +267,20 @@
         <br>
         <br>
         <?php if (!empty($error)) { ?>
-            <div style=" margin-left: 245px;" id="notify-msg">
-
-                <?= $error ?>. <a href="javascript:history.back()">Quay lại</a>
-
-            </div>
+            <?php
+            echo "<script>
+                localStorage.removeItem('selectedCartIds');
+                alert('$error');
+                window.location.href = '$base_url/page/cart.php';
+             </script>";
+            ?>
         <?php } else if (!empty($success)) { ?>
-            <div style=" margin-left: 245px;" id="notify-msg">
-
-                <?= $success ?>. <a href="donhang.php">Tiếp tục vào trang đơn hàng</a>
-
-            </div>
+            <?php
+            echo "<script>
+                alert('Đặt đơn hàng thành công. Tiếp tục vào đơn hàng');
+                window.location.href = '$base_url/page/order.php';
+            </script>";
+            ?>
         <?php
         } else { ?>
             <div id="cart" class="container">
@@ -417,7 +419,7 @@
     } else {
         echo " <div class='popup' id='popup'>
         <div class='popup-content'>
-            <p>Bạn không thể thêm hoặc vào giỏ hàng vì chưa đăng nhập. Vui lòng đăng nhập tại đây.<a href='login.php'> Đăng nhập</a>.</p>
+            <p>Bạn không thể thêm hoặc vào giỏ hàng vì chưa đăng nhập. Vui lòng đăng nhập tại đây.<a href='$base_url/page/login.php'> Đăng nhập</a>.</p>
         </div>
     </div>";
     }
@@ -528,6 +530,4 @@
         })
     </script>
 </body>
-
-
 </html>

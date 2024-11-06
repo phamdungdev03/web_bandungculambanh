@@ -267,3 +267,15 @@
         </div>
     </div>
 </header>
+
+<script>
+    window.addEventListener('load', () => {
+        const currentPath = window.location.pathname;
+        const currentUrl = window.location.href;
+        const isCartPage = currentPath.includes('/page/cart.php');
+        const isEditAction = currentUrl.includes('action=edit');
+        if (!(isCartPage && !isEditAction)) {
+            localStorage.removeItem('selectedCartIds');
+        }
+    });
+</script>
