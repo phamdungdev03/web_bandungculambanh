@@ -211,11 +211,16 @@
             </ul>
         </div>
     </div>
-
+    <?php
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $host = $_SERVER['HTTP_HOST'];
+    $projectRoot = '/php/web_bandungculambanh';
+    $base_url = $protocol . $host . $projectRoot;
+    ?>
     <!-- Content Section -->
     <div class="header-content">
         <div class="logo">
-            <img src="http://localhost/web_dungculambanh/public/images/logo_shop.png" alt="Logo">
+            <img src="<?php echo $base_url; ?>/public/images/logo_shop.png" alt="Logo">
         </div>
 
         <div class="search-bar">
@@ -227,26 +232,26 @@
             <?php
             if (isset($_SESSION['username'])) {
                 echo "
-                            <a href='http://localhost/web_dungculambanh/page/order.php' class='header__nav-item'>
+                            <a href='$base_url/page/order.php' class='header__nav-item'>
                                 <i class='fa-solid fa-table-list'></i>
                                 <p>Đơn hàng</p>
                             </a>
-                            <a href='http://localhost/web_dungculambanh/page/cart.php' class='header__nav-item'>
+                            <a href='$base_url/page/cart.php' class='header__nav-item'>
                                 <i class='fa-solid fa-cart-shopping'></i>
                                 <p>Giỏ hàng</p>
                             </a>
                         
-                            <a  href='http://localhost/web_dungculambanh/page/component/logout.php' class='header__nav-item'>
+                            <a  href='$base_url/page/component/logout.php' class='header__nav-item'>
                                 <i class='fa-solid fa-right-from-bracket'></i>
                                 <p class='name_user'>" . $_SESSION['username'] . "</p>
                             </a>
                         ";
             } else {
                 echo " 
-                            <a href='page/cart.php' class='cart'>
+                            <a href='$base_url/page/cart.php' class='cart'>
                                 <i class='fa-solid fa-cart-shopping'></i>
                             </a>
-                            <a href='http://localhost/web_dungculambanh/page/login.php' class='login-btn'>Đăng Nhập</a>
+                            <a href='$base_url/page/login.php' class='login-btn'>Đăng Nhập</a>
                         ";
             }
             ?>
@@ -255,9 +260,9 @@
     <div class="container_header-bottom">
         <div class="header-bottom">
             <ul>
-                <li><a href="../index.php">trang chủ</a></li>
-                <li><a href="http://localhost/web_dungculambanh/page/products.php">sản phẩm</a></li>
-                <li><a href="http://localhost/web_dungculambanh/page/contact.php">liên hệ</a></li>
+                <li><a href="<?php echo $base_url; ?>/index.php">trang chủ</a></li>
+                <li><a href="<?php echo $base_url; ?>/page/products.php">sản phẩm</a></li>
+                <li><a href="<?php echo $base_url; ?>/page/contact.php">liên hệ</a></li>
             </ul>
         </div>
     </div>

@@ -120,7 +120,7 @@
                             ?>
                         </td>
                         <td>
-                            <a href="order_detail.php">Xem chi tiết</a>
+                            <a href="order_detail.php?idh=<?php echo $ma ?>">Xem chi tiết</a>
                         </td>
                         <td>
                             <?php if ($mattcu == 5) { ?>

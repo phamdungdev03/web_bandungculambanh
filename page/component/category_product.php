@@ -109,7 +109,8 @@
 <section class="container__category-product">
     <div class="category_product-items">
         <?php
-        include($_SERVER['DOCUMENT_ROOT'] . '/web_dungculambanh/config/database.php');
+        include('../config/database.php');
+        include('../config/url_config.php');
         $conn = getConnection();
         $result = mysqli_query($conn, $sql);
 
@@ -122,10 +123,10 @@
                 $format_price = number_format($price, 0, ",", ".");
         ?>
                 <div class="product-item">
-                    <a href="page/detail_product.php?product_id=<?php echo $product_id; ?>">
+                    <a href="<?php echo $base_url ?>/page/detail_product.php?product_id=<?php echo $product_id; ?>">
                         <img src="../public/uploads/<?php echo $image_url; ?>" alt="product_img">
                     </a>
-                    <a href="page/detail_product.php?product_id=<?php echo $product_id; ?>">
+                    <a href="<?php echo $base_url ?>/page/detail_product.php?product_id=<?php echo $product_id; ?>">
                         <h2 class="product-title"><?php echo htmlspecialchars($product_name); ?></h2>
                     </a>
                     <p class="product-price"><?php echo $format_price; ?>₫</p>
