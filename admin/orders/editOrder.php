@@ -1,3 +1,18 @@
+<style>
+    .disabled-btn {
+        background-color: gray;
+        font-weight: 600;
+        pointer-events: none;
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .disabled-btn:hover {
+        background-color: gray;
+        color: #fff;
+    }
+</style>
+
 <div class="row">
     <div class="col-lg-12">
         <h3 class="page-header"><i class="fa fa-laptop"></i> Cập Nhật Đơn Hàng</h3>
@@ -54,7 +69,7 @@ if (isset($_GET['order_id'])) {
                             <option value="cancelled" <?php echo ($order['status'] == 'cancelled') ? 'selected' : ''; ?>>Đã Hủy</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Cập Nhật Đơn Hàng</button>
+                    <button type="submit" class="btn btn-primary <?php echo (($order['status'] == 'completed') || ($order['status'] == 'cancelled')) ? 'disabled-btn' : ''; ?>">Cập Nhật Đơn Hàng</button>
                 </form>
             </div>
         </section>

@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <title>Chi tiết sản phẩm</title>
-    <link rel="stylesheet" href="./chitietsanpham.css">
     <link rel="shortcut icon" href="./hinh_anh/logo.png" />
     <link rel="stylesheet" href="./css/detail_product.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -14,6 +13,7 @@
     <?php
     session_start();
     include("./component/header.php");
+    include('../config/url_config.php');
     ?>
 
     <?php
@@ -30,6 +30,7 @@
         $mota = $row["description"];
         $parsed_gia = number_format($gia, 0, ",", ",");
         $category_id = $row['category_id'];
+        $quantity = $row['quantity'];
     }
     if ($category_id) {
         $sql1 = "SELECT * From categories where category_id = $category_id";
@@ -50,15 +51,16 @@
                 </div>
                 <div class="detail-info-category">
                     <span>Danh mục:
-                        <a href="./danhmucsanpham.php?category_id=<?php echo $category_id ?>"><?php echo $category_name ?></a>
+                        <a href="<?php echo $base_url ?>/products.php?category_id=<?php echo $category_id ?>"><?php echo $category_name ?></a>
                     </span>
                 </div>
                 <div class="detail-info-quantity">
                     <form action="cart.php?action=add" method="POST">
                         <div class="detail-info-quantity__number">
+                            <input type="hidden" id="quantity_product" value="<?php echo $quantity ?>">
                             <div class="detail-info-quantity__number-option">
                                 <span id="prev">-</span>
-                                <input type="number" id="quantity" value="1" name="quantity[<?php echo $product_id ?>]">
+                                <input type="number" id="quantity" value="1" max="<?php echo $quantity ?>" name="quantity[<?php echo $product_id ?>]">
                                 <span id="add">+</span>
                             </div>
                         </div>
@@ -117,6 +119,7 @@
     var prev = document.getElementById("prev");
     var add = document.getElementById("add");
     var quantity = document.getElementById("quantity");
+    var quantityProduct = document.getElementById("quantity_product");
 
     prev.onclick = () => {
         var currentValue = parseInt(quantity.value);
@@ -127,6 +130,8 @@
 
     add.onclick = () => {
         var currentValue = parseInt(quantity.value);
-        quantity.value = currentValue + 1;
+        if (currentValue < parseInt(quantityProduct.value)) {
+            quantity.value = currentValue + 1;
+        }
     }
 </script>

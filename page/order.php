@@ -108,7 +108,7 @@
 
                         <td>
                             <?php
-                            $timestamp = strtotime($Ngaytao . ' +5 hour 0 minutes');
+                            $timestamp = strtotime($Ngaytao);
                             echo date('d/m/Y H:i', $timestamp);
                             ?>
                         </td>
@@ -143,9 +143,11 @@
                         </td>
                         <td>
                             <?php if ($mattcu == "cancelled") { ?>
-                            <?php echo "Hủy thành công";
+                            <?php echo "ĐÃ HỦY";
                             } else if ($mattcu == "completed") {
-                                echo "Đã hoàn thành";
+                                echo "ĐÃ HOÀN THÀNH";
+                            } else if($mattcu == "processed" || $mattcu == "shipping"){
+                                echo "Đang trong quá trình";
                             } else {
                             ?>
                                 <div class="box_btn">

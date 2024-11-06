@@ -31,9 +31,10 @@
                     <th>STT</th>
                     <th>MÃ ĐƠN HÀNG</th>
                     <th>TÊN SẢN PHẨM</th>
+                    <th>HÌNH ẢNH</th>
                     <th>GIÁ SẢN PHẨM</th>
                     <th>SỐ LƯỢNG</th>
-                    <th>TỔNG GIÁ TRỊ</th>
+                    <th>THÀNH TIỀN</th>
                 </tr>
                 <?php
                 $tongs = 0;
@@ -47,6 +48,7 @@
                     $ten = $rowItem['product_name'];
                     $gia = $row['price'];
                     $soluong = $row['quantity'];
+                    $image_url = $rowItem['image_url'];
                     $tong = $row['quantity'] * $row['price'];
                     $tongs += $row['quantity'] * $row['price'];
                 ?>
@@ -68,6 +70,9 @@
                             echo   $ten;
                             ?>
 
+                        </td>
+                        <td class="image-order">
+                            <img src="../public/uploads/<?php echo $image_url ?>" alt="">
                         </td>
                         <td>
 

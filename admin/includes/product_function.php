@@ -18,8 +18,8 @@ function getProductById($productId)
     $st->execute();
     $result = $st->get_result();
     if ($result->num_rows > 0) {
-        $category = $result->fetch_assoc();
-        return $category;
+        $product = $result->fetch_assoc();
+        return $product;
     }
 }
 
@@ -68,4 +68,23 @@ function deleteProduct($productId)
 
     $st->close();
     $conn->close();
+}
+
+function updateProductQuantity($productId, $quantity)
+{
+    $conn = getConnection();
+    $currentProdct = getProductById($productId);
+    $quantityCurent = $currentProdct['quantity'];
+    $newQuantity = $quantityCurent - $quantity;
+    $newQuantity = max(0, $newQuantity);
+    $sql = "UPDATE products SET quantity = ? WHERE product_id = ?";
+    $st = $conn->prepare($sql);
+    $st->bind_param("is", $newQuantity, $productId);
+    if ($st->execute()) {
+        return true;
+    } else {
+        return false;
+    }
+    $conn->close();
+    $st->closse();
 }

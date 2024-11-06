@@ -62,3 +62,9 @@
 .order a:hover {
     color: #d44a1e;
 }
+
+.image-order img{
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+}

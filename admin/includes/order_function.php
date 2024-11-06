@@ -25,7 +25,7 @@ function getOrderByOderId($orderId)
 
 function getAllOrderItemByOrderId($orderId){
     $conn = getConnection();
-    $sql = "SELECT ot.price, ot.quantity, p.product_name, p.image_url FROM order_items as ot JOIN products as p where ot.product_id = p.product_id AND order_id = $orderId";
+    $sql = "SELECT ot.product_id, ot.price, ot.quantity, p.product_name, p.image_url FROM order_items as ot JOIN products as p where ot.product_id = p.product_id AND order_id = $orderId";
     $result = $conn->query($sql);
     return $result;
 }

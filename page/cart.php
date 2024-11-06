@@ -194,8 +194,9 @@
 
                         date_default_timezone_set('Asia/Ho_Chi_Minh');
                         $currentTime = time();
+                        $formattedTime = date('Y-m-d H:i:s', $currentTime);
                         $sql2 = "INSERT INTO `orders`( `user_id`,`order_date`, `total_amount`, `status`)
-                VALUES ('$user_id', '$currentTime', '$total_amount', 'pending')";
+                        VALUES ('$user_id', '$formattedTime', '$total_amount', 'pending')";
                         $inserntOrder = mysqli_query($conn, $sql2);
                         $last_id = mysqli_insert_id($conn);
 
