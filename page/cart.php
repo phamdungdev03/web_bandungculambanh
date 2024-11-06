@@ -407,7 +407,7 @@
     } else {
         echo " <div class='popup' id='popup'>
         <div class='popup-content'>
-            <p>Bạn không thể thêm hoặc vào giỏ hàng vì chưa đăng nhập. Vui lòng đăng nhập tại đây.<a href='$base_url/page/login.php'> Đăng nhập</a>.</p>
+            <p>Bạn không thể thêm hoặc vào giỏ hàng vì chưa đăng nhập. Vui lòng đăng nhập tại đây.<a href='$base_url/login.php'> Đăng nhập</a>.</p>
         </div>
     </div>";
     }

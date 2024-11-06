@@ -369,9 +369,7 @@
 
         <div class="header__search-bar">
             <?php
-            $base_path = $_SERVER['DOCUMENT_ROOT'] . '/web_dungculambanh';
-
-            include $base_path . '/config/database.php';
+            include(__DIR__ . '/../../config/database.php');
             $conn = getConnection();
 
             if (isset($_GET["s1"]) && !empty($_GET["s1"])) {
