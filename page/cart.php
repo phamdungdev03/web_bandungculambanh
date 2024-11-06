@@ -149,17 +149,6 @@
                     // header("location:giohang.php");
                     break;
                 case "submit":
-                    if (empty($_POST['ten'])) {
-                        $error = "Bạn chưa nhập tên của người nhận";
-                    } else if (empty($_POST['sdt'])) {
-                        $error = "Bạn chưa nhập số điện thoại";
-                    } else if (empty($_POST['diachicuthe'])) {
-                        $error = "Bạn chưa chưa nhập địa chỉ cụ thể";
-                    } else if (empty($_POST['email'])) {
-                        $error = "Bạn chưa chưa nhập email";
-                    } else if (empty($_POST['quantity'])) {
-                        $error = "Giỏ hàng rỗng";
-                    }
                     if ($error == false) {
                         $conn = getConnection();
                         $customer_id = $_SESSION['user_id'];
@@ -283,138 +272,137 @@
             ?>
         <?php
         } else { ?>
-            <div id="cart" class="container">
-                <div class="cart-head">
-                    <p>GIỎ HÀNG</p>(
-                    <span>
-                        <?php
-                        if ($result && mysqli_num_rows($result) > 0) {
-                            $totalProducts = mysqli_num_rows($result);
-                            echo "<strong>$totalProducts</strong> sản phẩm";
-                        }
-                        ?>
-                    </span>
-                    )
-                </div>
-                <form id="sendIdsForm" action="cart.php?action=submit" method="POST">
-                    <div class="cart-left">
-                        <div class="cart-title">
-                            <div class="cart-title-title">
-                                <input type="checkbox" class="checkbox-all">
-                                <span>Chọn tất cả
-                                    <?php
-                                    if ($result && mysqli_num_rows($result) > 0) {
-                                        $totalProducts = mysqli_num_rows($result);
-                                        echo "($totalProducts sản phẩm)";
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-                            <div class="cart-title-content">
-                                <p>Số lượng</p>
-                                <p>Thành tiền</p>
-                            </div>
-                        </div>
-                        <div class="cart-content">
+            <?php
+            if ($result && mysqli_num_rows($result) <= 0) {
+                echo "<div class='cart_null'>Không có sản phẩm nào trong giỏ hàng</div>";
+            ?>
+            <?php
+            } else {
+            ?>
+                <div id="cart" class="container">
+                    <div class="cart-head">
+                        <p>GIỎ HÀNG</p>(
+                        <span>
                             <?php
                             if ($result && mysqli_num_rows($result) > 0) {
-                                $total = 0;
-                                while ($row = mysqli_fetch_array($result)) {   ?>
-                                    <div class="cart-item">
-                                        <div class="cart-item-left">
-                                            <input type="checkbox" class="cart-checkbox" data-cart-id="<?= $row["cart_item_id"] ?>">
-                                            <img src="../public/uploads/<?= $row["image_url"] ?>" alt="image">
-                                            <p><?= $row["product_name"] ?></p>
-                                        </div>
-                                        <div class="cart-item-center">
-                                            <div class="cart-item-center__quantity">
-                                                <span id="prev" data-product_id="<?= $row["product_id"] ?>" data-cart-id="<?= $row["cart_item_id"] ?>">-</span>
-                                                <input id="quantity" name="quantity" type="number" min="1" value="<?= $row["quantity"] ?>" data-product_id="<?= $row["product_id"] ?>" data-cart-id="<?= $row["cart_item_id"] ?>">
-                                                <span id="add" data-product_id="<?= $row["product_id"] ?>" data-cart-id="<?= $row["cart_item_id"] ?>">+</span>
-                                            </div>
-                                            <span class="cart-item-center__total"><?= number_format($row["quantity"] * $row["price"], 0, ",", ","); ?>₫</span>
-                                        </div>
-                                        <a class="cart-remove" href="cart.php?action=delete&id=<?= $row["cart_item_id"] ?>&cart_id=<?= $row["cart_id"] ?>" style="text-decoration: none;">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-                            <?php } ?>
-                        </div>
+                                $totalProducts = mysqli_num_rows($result);
+                                echo "<strong>$totalProducts</strong> sản phẩm";
+                            }
+                            ?>
+                        </span>
+                        )
                     </div>
-                    <div class="cart-center">
-                        <div class="cart-shipping">
-                            <p>Thông tin nhận hàng</p>
-                            <div class="cart-shipping-input">
-                                <input type="text" name="ten" placeholder="Người nhận" />
-                                <input type="text" name="sdt" placeholder="Số điện thoại" />
-                                <input type="text" name="diachicuthe" placeholder="Địa chỉ cụ thể" />
-                                <input type="email" name="email" placeholder="Email" />
+                    <form id="sendIdsForm" action="cart.php?action=submit" method="POST">
+                        <div class="cart-left">
+                            <div class="cart-title">
+                                <div class="cart-title-title">
+                                    <input type="checkbox" class="checkbox-all">
+                                    <span>Chọn tất cả
+                                        <?php
+                                        if ($result && mysqli_num_rows($result) > 0) {
+                                            $totalProducts = mysqli_num_rows($result);
+                                            echo "($totalProducts sản phẩm)";
+                                        }
+                                        ?>
+                                    </span>
+                                </div>
+                                <div class="cart-title-content">
+                                    <p>Số lượng</p>
+                                    <p>Thành tiền</p>
+                                </div>
+                            </div>
+                            <div class="cart-content">
+                                <?php
+                                if ($result && mysqli_num_rows($result) > 0) {
+                                    $total = 0;
+                                    while ($row = mysqli_fetch_array($result)) {   ?>
+                                        <div class="cart-item">
+                                            <div class="cart-item-left">
+                                                <input type="checkbox" class="cart-checkbox" data-cart-id="<?= $row["cart_item_id"] ?>">
+                                                <img src="../public/uploads/<?= $row["image_url"] ?>" alt="image">
+                                                <p><?= $row["product_name"] ?></p>
+                                            </div>
+                                            <div class="cart-item-center">
+                                                <div class="cart-item-center__quantity">
+                                                    <span id="prev" data-product_id="<?= $row["product_id"] ?>" data-cart-id="<?= $row["cart_item_id"] ?>">-</span>
+                                                    <input id="quantity" name="quantity" type="number" min="1" value="<?= $row["quantity"] ?>" data-product_id="<?= $row["product_id"] ?>" data-cart-id="<?= $row["cart_item_id"] ?>">
+                                                    <span id="add" data-product_id="<?= $row["product_id"] ?>" data-cart-id="<?= $row["cart_item_id"] ?>">+</span>
+                                                </div>
+                                                <span class="cart-item-center__total"><?= number_format($row["quantity"] * $row["price"], 0, ",", ","); ?>₫</span>
+                                            </div>
+                                            <a class="cart-remove" href="cart.php?action=delete&id=<?= $row["cart_item_id"] ?>&cart_id=<?= $row["cart_id"] ?>" style="text-decoration: none;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                <?php } ?>
                             </div>
                         </div>
-                        <?php
-                        $hasValidId = false;
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            if (isset($_POST['selectedIds'])) {
-                                $selectedIds = json_decode($_POST['selectedIds'], true);
-                                foreach ($selectedIds as $id) {
-                                    $hasValidId = true;
-                                    $conn = getConnection();
-                                    $sql1 = "SELECT ci.*, p.price AS product_price FROM cart_items ci
+                        <div class="cart-center">
+                            <?php
+                            $hasValidId = false;
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                if (isset($_POST['selectedIds'])) {
+                                    $selectedIds = json_decode($_POST['selectedIds'], true);
+                                    foreach ($selectedIds as $id) {
+                                        $hasValidId = true;
+                                        $conn = getConnection();
+                                        $sql1 = "SELECT ci.*, p.price AS product_price FROM cart_items ci
                                               JOIN products p ON ci.product_id = p.product_id
                                               WHERE ci.cart_item_id = $id";
-                                    $result = mysqli_query($conn, $sql1);
+                                        $result = mysqli_query($conn, $sql1);
 
-                                    if ($row = $result->fetch_assoc()) {
-                                        $total += $row['product_price'] * $row['quantity'];
+                                        if ($row = $result->fetch_assoc()) {
+                                            $total += $row['product_price'] * $row['quantity'];
+                                        }
                                     }
+
+                            ?>
+                                    <input type="hidden" name="sendIds" id="sendIdsInput">
+                                    <input class="checkout <?php echo !$hasValidId ? 'disabled-btn' : ''; ?>" value="THANH TOÁN" onclick="buyProduct()">
+                                    <div class="cart-detail">
+                                        <div class="cart-detail-price">
+                                            <p>Thành tiền</p>
+                                            <span><?php echo number_format($total, 0, ',', '.'); ?>đ</span>
+                                        </div>
+                                        <div class="cart-detail-total">
+                                            <p>Tổng số tiền (gồm VAT)</p>
+                                            <span><?php echo number_format($total, 0, ',', '.'); ?>đ</span>
+                                        </div>
+                                    </div>
+                            <?php
                                 }
-
-                        ?>
-                                <div class="cart-detail">
-                                    <div class="cart-detail-price">
-                                        <p>Thành tiền</p>
-                                        <span><?php echo number_format($total, 0, ',', '.'); ?>đ</span>
-                                    </div>
-                                    <div class="cart-detail-total">
-                                        <p>Tổng số tiền (gồm VAT)</p>
-                                        <span><?php echo number_format($total, 0, ',', '.'); ?>đ</span>
-                                    </div>
-                                </div>
-                        <?php
                             }
-                        }
-                        ?>
-                        <input type="hidden" name="sendIds" id="sendIdsInput">
-                        <input class="checkout <?php echo !$hasValidId ? 'disabled-btn' : ''; ?>" value="THANH TOÁN" onclick="buyProduct()">
-                    </div>
-            </div>
-            </form>
-            <form id="updateCartForm" action="cart.php?action=edit" method="POST" style="display:none;">
-                <input type="hidden" name="cart_item_id" id="hiddenCartId">
-                <input type="hidden" name="product_id" id="hiddenProductId">
-                <input type="hidden" name="quantity" id="hiddenQuantity">
-            </form>
-            <form id="myForm" method="POST" action="cart.php">
-                <input type="hidden" name="selectedIds" id="selectedIds">
-            </form>
-            <form id="cart-list-form" action="cart.php?action=select" method="POST">
-                <input type="hidden" name="cartIds" id="cartIds">
-            </form>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-            <script>
-                function addToT() {
-                    <?php
+                            ?>
+                        </div>
+                </div>
+                </form>
+                <form id="updateCartForm" action="cart.php?action=edit" method="POST" style="display:none;">
+                    <input type="hidden" name="cart_item_id" id="hiddenCartId">
+                    <input type="hidden" name="product_id" id="hiddenProductId">
+                    <input type="hidden" name="quantity" id="hiddenQuantity">
+                </form>
+                <form id="myForm" method="POST" action="cart.php">
+                    <input type="hidden" name="selectedIds" id="selectedIds">
+                </form>
+                <form id="cart-list-form" action="cart.php?action=select" method="POST">
+                    <input type="hidden" name="cartIds" id="cartIds">
+                </form>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+                <script>
+                    function addToT() {
+                        <?php
 
-                    echo "window.location.href='index.php';";
-                    ?>
-                }
-            </script>
+                        echo "window.location.href='index.php';";
+                        ?>
+                    }
+                </script>
     <?php
+            }
         }
     } else {
         echo " <div class='popup' id='popup'>
@@ -530,4 +518,5 @@
         })
     </script>
 </body>
+
 </html>

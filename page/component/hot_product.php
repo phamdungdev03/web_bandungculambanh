@@ -116,7 +116,7 @@
     <div class="hot_product-title">
         <h2>Sản phẩm HOT</h2>
         <p>Siêu Thị Ngành Bánh Nhất Hương, hay còn biết đến với tên gọi Bakers’ Mart Nhất Hương. Đây là một nơi mua sắm lý tưởng về những nguyên – phụ liệu và dụng cụ làm bánh được rất nhiều khách hàng yêu thích. Các sản phẩm hot, nổi bật trên thị trường tất cả đều có sẵn. Nhấn vào danh mục dưới đây để xem và khám phá ngay.</p>
-        <button>Xem tất cả ></button>
+        <a href="./page/products.php"><button>Xem tất cả ></button></a>
     </div>
 
     <div class="hot_product-items">

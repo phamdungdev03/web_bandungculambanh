@@ -56,10 +56,10 @@
                 <div class="detail-info-quantity">
                     <form action="cart.php?action=add" method="POST">
                         <div class="detail-info-quantity__number">
-                            <input type="number" id="quantity" value="1" name="quantity[<?php echo $product_id ?>]">
                             <div class="detail-info-quantity__number-option">
-                                <span id="add">+</span>
                                 <span id="prev">-</span>
+                                <input type="number" id="quantity" value="1" name="quantity[<?php echo $product_id ?>]">
+                                <span id="add">+</span>
                             </div>
                         </div>
                         <div class="detail-btn">
