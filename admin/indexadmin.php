@@ -25,7 +25,8 @@ include('./components/head.php');
         "8" => "./users/addUser.php",
         "9" => "./users/editUser.php",
         "10" => "./orders/listOrder.php",
-        "11" => "./orders/editOrder.php"
+        "11" => "./orders/editOrder.php",
+        "12" => "./contacts/listContact.php",
     ];
     $id = $_GET["id"] ?? null;
     $trang = $pages[$id] ?? 'dashboard.php';

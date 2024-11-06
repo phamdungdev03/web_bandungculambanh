@@ -68,7 +68,6 @@ CREATE TABLE order_items (
 CREATE TABLE contact (
     contact_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    user_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20),
     message TEXT,

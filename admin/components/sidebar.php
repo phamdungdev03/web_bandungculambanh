@@ -52,6 +52,16 @@
 					<li><a style="font-size: 14px; font-weight: 400;" class="" href="indexadmin.php?id=10">Danh sách đơn hàng</a></li>
 				</ul>
 			</li>
+			<li class="sub-menu">
+				<a href="javascript:;" class="">
+					<i style="font-size: 14px;" class="icon_desktop"></i>
+					<span style="font-size: 14px; font-weight: 500;">Quản lí liên hệ</span>
+					<span class="menu-arrow arrow_carrot-right"></span>
+				</a>
+				<ul class="sub">
+					<li><a style="font-size: 14px; font-weight: 400;" class="" href="indexadmin.php?id=12">Danh sách liên hệ</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 </aside>
