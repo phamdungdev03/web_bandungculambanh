@@ -30,10 +30,11 @@
             if ($result && $result->num_rows > 0) {
                 $first_category = $result->fetch_assoc();
                 $category_id = $first_category['category_id'];
+            }else{
+                $category_id = null;
             }
         }
         if ($category_id === null) {
-            header("Location: index.php");
             exit();
         } else {
             $sql1 = "SELECT COUNT(*) as total_products FROM products WHERE category_id = $category_id";
