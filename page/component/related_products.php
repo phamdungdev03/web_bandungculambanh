@@ -1,23 +1,11 @@
 <style>
-    .container__all-product {
-        margin: 80px auto;
+    .container__hot-product {
+        margin: 0 auto;
         max-width: 1450px;
+        display: flex;
     }
 
-    .all_product-title {
-        text-align: center;
-    }
-
-    .all_product-title h2 {
-        color: #333;
-        font-size: 30px;
-        font-weight: 700;
-        line-height: 30px;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-    }
-
-    .container__all-product p {
+    .container__hot-product p {
         margin-bottom: 30px;
         color: #666;
         font-size: 20px;
@@ -25,7 +13,7 @@
         text-align: left;
     }
 
-    .all_product-items {
+    .hot_product-items {
         flex-basis: 75%;
         display: flex;
         flex-wrap: wrap;
@@ -109,14 +97,10 @@
     }
 </style>
 
-<section class="container__all-product">
-    <div class="all_product-title">
-        <h2>Tất cả sản phẩm</h2>
-    </div>
-    <div class="all_product-items">
+<section class="container__hot-product">
+    <div class="hot_product-items">
         <?php
         include($_SERVER['DOCUMENT_ROOT'] . '/web_dungculambanh/config/database.php');
-        $sql = "SELECT * FROM products";
         $conn = getConnection();
         $result = mysqli_query($conn, $sql);
 
@@ -130,7 +114,7 @@
         ?>
                 <div class="product-item">
                     <a href="page/detail_product.php?product_id=<?php echo $product_id; ?>">
-                        <img src="public/uploads/<?php echo $image_url; ?>" alt="product_img">
+                        <img src="../public/uploads/<?php echo $image_url; ?>" alt="product_img">
                     </a>
                     <a href="page/detail_product.php?product_id=<?php echo $product_id; ?>">
                         <h2 class="product-title"><?php echo htmlspecialchars($product_name); ?></h2>

@@ -14,6 +14,7 @@
     include("./page/component/header.php");
     include("./page/component/banner.php");
     include("./page/component/hot_product.php");
+    include("./page/component/all_product.php");
     include("./page/component/footer.php");
     ?>
 </body>

@@ -22,6 +22,11 @@
         if (isset($_GET['action'])) {
             function addToCart($customer_id, $product_id, $quantity)
             {
+                if (!isset($customer_id) || !isset($product_id) || !isset($quantity)) {
+                    echo "Error: One of the required parameters is missing.";
+                    return;
+                }
+
                 $conn = getConnection();
                 $sql1 = "SELECT cart_id FROM cart WHERE user_id = $customer_id";
                 $result1 = $conn->query($sql1);
@@ -57,7 +62,7 @@
                     $sql4 = "UPDATE cart_items SET quantity = $new_quantity WHERE cart_id = $cart_id AND product_id = $product_id";
                     $conn->query($sql4);
                 } else {
-                    $sql5 = "INSERT INTO cart_items (cart_id, product_id, quantity, price) VALUES ($cart_id, $product_id, $quantity, $price)";
+                    $sql5 = "INSERT INTO cart_items (cart_id, product_id, quantity) VALUES ($cart_id, $product_id, $quantity)";
                     $conn->query($sql5);
                 }
             }
@@ -91,7 +96,7 @@
 
             function deleteCartWhenByProduct($customerId, $conn)
             {
-                $sql1 = "SELECT cart_id FROM cart WHERE customer_id = $customerId";
+                $sql1 = "SELECT cart_id FROM cart WHERE user_id = $customerId";
                 $result1 = $conn->query($sql1);
 
                 if ($result1->num_rows > 0) {
@@ -102,11 +107,11 @@
                             $selectedIds = json_decode($_POST['sendIds'], true);
                             if (json_last_error() === JSON_ERROR_NONE) {
                                 foreach ($selectedIds as $id) {
-                                    $sql2 = "SELECT cart_item_id FROM cart_items WHERE id = $id";
+                                    $sql2 = "SELECT cart_item_id FROM cart_items WHERE cart_item_id = $id";
                                     $result2 = $conn->query($sql2);
                                     if ($result2->num_rows > 0) {
                                         while ($itemRow = $result2->fetch_assoc()) {
-                                            $cart_item_id = $itemRow['id'];
+                                            $cart_item_id = $itemRow['cart_item_id'];
                                             deleteCart($cart_id, $cart_item_id);
                                         }
                                     }
@@ -158,7 +163,7 @@
                         $conn = getConnection();
                         $customer_id = $_SESSION['user_id'];
 
-                        $sql = "SELECT cart_id FROM cart WHERE customer_id = $customer_id";
+                        $sql = "SELECT cart_id FROM cart WHERE user_id = $customer_id";
                         $resultCartItem = $conn->query($sql);
                         if ($resultCartItem->num_rows > 0) {
                             $row = $resultCartItem->fetch_assoc();
@@ -174,9 +179,13 @@
                                 $selectedIds = json_decode($_POST['sendIds'], true);
                                 if (json_last_error() === JSON_ERROR_NONE) {
                                     foreach ($selectedIds as $id) {
-                                        $sql2 = "SELECT * FROM cart_items WHERE id = $id";
+                                        $sql2 = "SELECT ci.quantity, p.price 
+                                                  FROM cart_items ci
+                                                  JOIN products p ON ci.product_id = p.product_id
+                                                  WHERE ci.cart_item_id = $id";
                                         $result2 = $conn->query($sql2);
-                                        if ($result2->num_rows > 0) {
+
+                                        if ($result2 && $result2->num_rows > 0) {
                                             while ($itemRow = $result2->fetch_assoc()) {
                                                 $total = $itemRow["quantity"] * $itemRow["price"];
                                                 $total_amount += $total;
@@ -187,7 +196,9 @@
                             }
                         }
 
+
                         $userRow = $resultUser->fetch_assoc();
+                        $user_id = $_SESSION['user_id'];
                         $customer_name = $_POST['ten'];
                         $customer_address = $_POST['diachicuthe'];
                         $customer_email = $_POST['email'];
@@ -195,9 +206,8 @@
 
                         date_default_timezone_set('Asia/Ho_Chi_Minh');
                         $currentTime = time();
-                        $order_status = '1';
-                        $sql2 = "INSERT INTO `don_hang`( `customer_name`, `customer_address`, `customer_email`, `customer_phone`, `total_amount`, `order_date`, `order_status`)
-                VALUES ('$customer_name', '$customer_address', '$customer_email', '$customer_phone', '$total_amount', '$currentTime', '$order_status')";
+                        $sql2 = "INSERT INTO `orders`( `user_id`,`order_date`, `total_amount`, `status`)
+                VALUES ('$user_id', '$currentTime', '$total_amount', 'Pending')";
                         $inserntOrder = mysqli_query($conn, $sql2);
                         $last_id = mysqli_insert_id($conn);
 
@@ -206,24 +216,37 @@
                                 $selectedIds = json_decode($_POST['sendIds'], true);
                                 if (json_last_error() === JSON_ERROR_NONE) {
                                     foreach ($selectedIds as $id) {
-                                        $sql4 = "SELECT * FROM cart_items WHERE id = $id";
+                                        // Sử dụng JOIN để lấy thông tin giá từ bảng products
+                                        $sql4 = "SELECT ci.quantity, p.price, ci.product_id 
+                                                  FROM cart_items ci 
+                                                  JOIN products p ON ci.product_id = p.product_id 
+                                                  WHERE ci.cart_item_id = $id";
                                         $result4 = $conn->query($sql4);
-                                        if ($result4->num_rows > 0) {
+
+                                        if ($result4 && $result4->num_rows > 0) {
                                             while ($itemRow = $result4->fetch_assoc()) {
                                                 $price = $itemRow['price'];
                                                 $quantity = $itemRow['quantity'];
                                                 $product_id = $itemRow['product_id'];
-                                                $sql3 = "INSERT INTO `chi_tiet_don_hang` (`order_id`, `price`, `quantity`, `customer_id`, `product_id`) VALUES ('$last_id', '$price','$quantity','$customer_id','$product_id')";
-                                                $inserntOrder = mysqli_query($conn, $sql3);
+
+                                                // Chèn thông tin vào bảng order_items
+                                                $sql3 = "INSERT INTO `order_items`(`order_id`, `price`, `quantity`, `product_id`) 
+                                                          VALUES ('$last_id', '$price', '$quantity', '$product_id')";
+                                                $insertOrder = mysqli_query($conn, $sql3);
+
+                                                // Kiểm tra lỗi khi chèn dữ liệu
+                                                if (!$insertOrder) {
+                                                    echo "Lỗi khi chèn đơn hàng: " . mysqli_error($conn);
+                                                }
                                             }
                                         }
                                     }
                                     $success = "Đặt hàng thành công";
                                     echo "
-                    <script>
-                        localStorage.removeItem('selectedCartIds');
-                    </script>
-                    ";
+                                    <script>
+                                        localStorage.removeItem('selectedCartIds');
+                                    </script>
+                                    ";
                                     deleteCartWhenByProduct($customer_id, $conn);
                                 }
                             }
@@ -298,7 +321,7 @@
                                     <div class="cart-item">
                                         <div class="cart-item-left">
                                             <input type="checkbox" class="cart-checkbox" data-cart-id="<?= $row["cart_item_id"] ?>">
-                                            <img src="./hinh_anh/uploads/<?= $row["image_url"] ?>" alt="image">
+                                            <img src="../public/uploads/<?= $row["image_url"] ?>" alt="image">
                                             <p><?= $row["product_name"] ?></p>
                                         </div>
                                         <div class="cart-item-center">
@@ -337,11 +360,16 @@
                                 foreach ($selectedIds as $id) {
                                     $hasValidId = true;
                                     $conn = getConnection();
-                                    $sql1 = "SELECT *  FROM cart_items WHERE cart_item_id = $id ";
+                                    $sql1 = "SELECT ci.*, p.price AS product_price FROM cart_items ci
+                                              JOIN products p ON ci.product_id = p.product_id
+                                              WHERE ci.cart_item_id = $id";
                                     $result = mysqli_query($conn, $sql1);
-                                    $row = $result->fetch_assoc();
-                                    $total += $row['price'] * $row['quantity'];
+
+                                    if ($row = $result->fetch_assoc()) {
+                                        $total += $row['product_price'] * $row['quantity'];
+                                    }
                                 }
+
                         ?>
                                 <div class="cart-detail">
                                     <div class="cart-detail-price">
@@ -367,9 +395,6 @@
                 <input type="hidden" name="product_id" id="hiddenProductId">
                 <input type="hidden" name="quantity" id="hiddenQuantity">
             </form>
-            <!-- <form id="sendIdsForm" method="POST" action="giohang.php?action=submit">
-        <input type="hidden" name="sendIds" id="sendIdsInput">
-      </form> -->
             <form id="myForm" method="POST" action="cart.php">
                 <input type="hidden" name="selectedIds" id="selectedIds">
             </form>
@@ -392,10 +417,14 @@
     } else {
         echo " <div class='popup' id='popup'>
         <div class='popup-content'>
-            <p>Bạn không thể thêm hoặc vào giỏ hàng vì chưa đăng nhập. Vui lòng đăng nhập tại đây.<a href='dangnhap.php'> Đăng nhập</a>.</p>
+            <p>Bạn không thể thêm hoặc vào giỏ hàng vì chưa đăng nhập. Vui lòng đăng nhập tại đây.<a href='login.php'> Đăng nhập</a>.</p>
         </div>
     </div>";
     }
+    ?>
+
+    <?php
+    include("./component/footer.php");
     ?>
     <script>
         let selectedCartIds = JSON.parse(localStorage.getItem('selectedCartIds')) || [];

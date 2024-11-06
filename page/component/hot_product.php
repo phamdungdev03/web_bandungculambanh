@@ -37,52 +37,78 @@
     }
 
     .product-item {
-        background-color: #f9f9f9;
+        background-color: #ffffff;
         border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 15px;
+        border-radius: 12px;
+        padding: 20px;
         text-align: center;
-        transition: transform 0.2s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         width: calc(25% - 20px);
         margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-item a {
+        text-decoration: none;
+        color: #000;
     }
 
     .product-item:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
     .product-item img {
         max-width: 100%;
         height: auto;
-        border-radius: 4px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .product-item:hover img {
+        transform: scale(1.05);
     }
 
     .product-title {
         font-size: 18px;
-        font-weight: 600;
-        margin: 10px 0;
+        font-weight: 700;
+        color: #333;
+        margin: 15px 0 8px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: 44px;
+        text-overflow: ellipsis;
     }
 
+
     .product-price {
-        color: #ff5722;
+        color: #e53935;
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 600;
+        text-align: center;
     }
 
     button {
+        margin-top: 15px;
         background-color: #4F2227;
         color: white;
         border: none;
         padding: 10px 20px;
-        border-radius: 5px;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 16px;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, transform 0.2s;
     }
 
     button:hover {
         background-color: #A95B3E;
+        transform: scale(1.05);
     }
 </style>
 
@@ -110,7 +136,7 @@
         ?>
                 <div class="product-item">
                     <a href="page/detail_product.php?product_id=<?php echo $product_id; ?>">
-                        <img src="./hinh_anh/uploads/<?php echo $image_url; ?>" alt="product_img">
+                        <img src="public/uploads/<?php echo $image_url; ?>" alt="product_img">
                     </a>
                     <a href="page/detail_product.php?product_id=<?php echo $product_id; ?>">
                         <h2 class="product-title"><?php echo htmlspecialchars($product_name); ?></h2>

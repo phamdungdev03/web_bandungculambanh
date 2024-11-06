@@ -1,0 +1,64 @@
+
+/* Phong cách cho phần order */
+.order {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    margin: 40px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* Phong cách cho bảng chi tiết đơn hàng */
+.bangchinh {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.bangchinh th,
+.bangchinh td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #dddddd;
+}
+
+.bangchinh th {
+    background-color: #f15b29;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.bangchinh td {
+    font-size: 0.95rem;
+    color: #333333;
+}
+
+/* Phong cách cho hàng tổng */
+.bangchinh tr:last-child td {
+    font-weight: bold;
+    color: #f15b29;
+}
+
+/* Phong cách cho liên kết Quay lại */
+.order a {
+    display: inline-block;
+    font-size: 1rem;
+    color: #f15b29;
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+.order a:hover {
+    color: #d44a1e;
+}

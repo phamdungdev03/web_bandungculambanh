@@ -93,6 +93,7 @@
         color: #fff;
         border-radius: 0 5px 5px 0;
         cursor: pointer;
+        margin: 0;
     }
 
     .user-actions {
@@ -242,9 +243,8 @@
                         ";
             } else {
                 echo " 
-                            <a href='#' class='cart'>
+                            <a href='page/cart.php' class='cart'>
                                 <i class='fa-solid fa-cart-shopping'></i>
-                                <span class='cart-count'>0</span>
                             </a>
                             <a href='http://localhost/web_dungculambanh/page/login.php' class='login-btn'>Đăng Nhập</a>
                         ";

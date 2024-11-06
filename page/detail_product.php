@@ -42,16 +42,9 @@
     ?>
     <div class="detail container">
         <div class="detail-info">
-            <img src="./hinh_anh/uploads/<?php echo $image_url ?>" alt="image">
+            <img src="../public/uploads/<?php echo $image_url ?>" alt="image">
             <div class="detail-info-detail">
                 <p class="detail-info-title"><?php echo $product_name ?></p>
-                <div class="detail-info-review">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
                 <div class="detail-info-price">
                     <p class="new-price"><?php echo $parsed_gia ?> VNĐ</p>
                 </div>
@@ -61,9 +54,9 @@
                     </span>
                 </div>
                 <div class="detail-info-quantity">
-                    <form action="giohang.php?action=add" method="POST">
+                    <form action="cart.php?action=add" method="POST">
                         <div class="detail-info-quantity__number">
-                            <input type="number" id="quantity" value="1" name="quantity[<?php echo $ma ?>]">
+                            <input type="number" id="quantity" value="1" name="quantity[<?php echo $product_id ?>]">
                             <div class="detail-info-quantity__number-option">
                                 <span id="add">+</span>
                                 <span id="prev">-</span>
@@ -99,7 +92,7 @@
             <?php
             $conn = getConnection();
             $sql = "SELECT * From products WHERE category_id = $category_id AND product_id != $product_id";
-            // require('./card_sanpham.php')
+            require('./component/related_products.php')
             ?>
         </div>
     </div>

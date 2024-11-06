@@ -72,9 +72,9 @@
         <div class="footer_column">
             <h3>Thông tin thành viên</h3>
             <ul>
-                <li><a href="#">Giới thiệu</a></li>
-                <li><a href="#">Đội ngũ</a></li>
-                <li><a href="#">Sự nghiệp</a></li>
+                <li><a href="#">Nguyễn Trung Hiếu - 18-11-2003</a></li>
+                <li><a href="#">Nguyễn Hiếu Đạt - 1-5-2003</a></li>
+                <li><a href="#">Nguyễn Thế Du - 7/6/2003</a></li>
             </ul>
         </div>
         <div class="footer_column">

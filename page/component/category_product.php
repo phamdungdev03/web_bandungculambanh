@@ -1,14 +1,11 @@
 <style>
-    .container__all-product {
-        margin: 80px auto;
-        max-width: 1450px;
+    .category_product-title {
+        flex-basis: 25%;
+        padding: 20px;
+        border-right: 1px dashed #4F2227;
     }
 
-    .all_product-title {
-        text-align: center;
-    }
-
-    .all_product-title h2 {
+    .category_product-title h2 {
         color: #333;
         font-size: 30px;
         font-weight: 700;
@@ -17,7 +14,7 @@
         text-transform: uppercase;
     }
 
-    .container__all-product p {
+    .container__category-product p {
         margin-bottom: 30px;
         color: #666;
         font-size: 20px;
@@ -25,7 +22,7 @@
         text-align: left;
     }
 
-    .all_product-items {
+    .category_product-items {
         flex-basis: 75%;
         display: flex;
         flex-wrap: wrap;
@@ -79,7 +76,7 @@
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        height: 44px;
+        height: 52px;
         text-overflow: ellipsis;
     }
 
@@ -109,14 +106,10 @@
     }
 </style>
 
-<section class="container__all-product">
-    <div class="all_product-title">
-        <h2>Tất cả sản phẩm</h2>
-    </div>
-    <div class="all_product-items">
+<section class="container__category-product">
+    <div class="category_product-items">
         <?php
         include($_SERVER['DOCUMENT_ROOT'] . '/web_dungculambanh/config/database.php');
-        $sql = "SELECT * FROM products";
         $conn = getConnection();
         $result = mysqli_query($conn, $sql);
 
@@ -130,7 +123,7 @@
         ?>
                 <div class="product-item">
                     <a href="page/detail_product.php?product_id=<?php echo $product_id; ?>">
-                        <img src="public/uploads/<?php echo $image_url; ?>" alt="product_img">
+                        <img src="../public/uploads/<?php echo $image_url; ?>" alt="product_img">
                     </a>
                     <a href="page/detail_product.php?product_id=<?php echo $product_id; ?>">
                         <h2 class="product-title"><?php echo htmlspecialchars($product_name); ?></h2>
